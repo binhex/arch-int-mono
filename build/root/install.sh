@@ -3,24 +3,23 @@
 # exit script if return code != 0
 set -e
 
-# resetting to live repo and using pacman for this app.
-echo 'Server = http://mirror.bytemark.co.uk/archlinux/$repo/os/$arch' > /etc/pacman.d/mirrorlist
-echo 'Server = http://archlinux.mirrors.uk2.net/$repo/os/$arch' >> /etc/pacman.d/mirrorlist
-
-# download fresh package databases from the server
-pacman -Fyy --noconfirm
-
-# sync package databases for pacman
-pacman -Syyu --noconfirm
-
 # build scripts
 ####
 
 # download build scripts from github
 curl --connect-timeout 5 --max-time 600 --retry 5 --retry-delay 0 --retry-max-time 60 -o /tmp/scripts-master.zip -L https://github.com/binhex/scripts/archive/master.zip
 
+# unzip build scripts
+unzip /tmp/scripts-master.zip -d /tmp
+
+# move shell scripts to /root
+mv /tmp/scripts-master/shell/arch/docker/*.sh /root/
+
 # pacman packages
 ####
+
+# call pacman db and package updater script
+source /root/upd.sh
 
 # define pacman packages
 pacman_packages="mono"
