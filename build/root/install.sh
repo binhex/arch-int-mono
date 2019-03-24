@@ -18,9 +18,6 @@ mv /tmp/scripts-master/shell/arch/docker/*.sh /root/
 # pacman packages
 ####
 
-# call pacman db and package updater script
-source /root/upd.sh
-
 # define pacman packages
 pacman_packages="mono"
 
