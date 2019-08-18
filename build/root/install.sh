@@ -27,9 +27,4 @@ if [[ ! -z "${pacman_packages}" ]]; then
 fi
 
 # cleanup
-yes|pacman -Scc
-pacman --noconfirm -Rns $(pacman -Qtdq) 2> /dev/null || true
-rm -rf /usr/share/locale/*
-rm -rf /usr/share/man/*
-rm -rf /usr/share/gtk-doc/*
-rm -rf /tmp/*
+cleanup.sh
